@@ -18,6 +18,7 @@ export declare class Service {
     removeHandler(name: string): boolean;
     removeHandlers(names: string[]): this;
     getHandler(name: string): Function | undefined;
+    hasHandler(name: string): boolean;
     receive(message: Message | MessageCollection | Channel): boolean | this;
 }
 export default Service;

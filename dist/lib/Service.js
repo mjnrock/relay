@@ -55,6 +55,9 @@ class Service {
     getHandler(name) {
         return this.handlers.get(name);
     }
+    hasHandler(name) {
+        return this.handlers.has(name);
+    }
     receive(message) {
         if (message instanceof Channel_1.default) {
             this.receive(message.messages);

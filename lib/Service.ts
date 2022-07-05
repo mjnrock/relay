@@ -60,6 +60,10 @@ export class Service {
 		return this.handlers.get(name);
 	}
 
+	public hasHandler(name: string) {
+		return this.handlers.has(name);
+	}
+
 	public receive(message: Message | MessageCollection | Channel) {
 		if(message instanceof Channel) {
 			this.receive(message.messages);
