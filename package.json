@@ -1,6 +1,6 @@
 {
 	"name": "@lespantsfancy/relay",
-	"version": "0.1.8",
+	"version": "0.2.0",
 	"description": "A messaging system and support network.",
 	"main": "dist/index.js",
 	"types": "index.d.ts",
