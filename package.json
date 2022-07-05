@@ -1,0 +1,32 @@
+{
+	"name": "@lespantsfancy/relay",
+	"version": "0.1.7",
+	"description": "A messaging system and support network.",
+	"main": "dist/index.js",
+	"types": "index.d.ts",
+	"scripts": {
+		"test": "npx jest --verbose",
+		"begin": "tsc --watch",
+		"start": "node dist/index.js",
+		"prepublish": "tsc",
+		"deploy": "yarn version --patch && yarn publish --access=public"
+	},
+	"author": "Matt Nawrocki",
+	"license": "ISC",
+	"dependencies": {
+		"@types/node": "^18.0.1",
+		"@types/react": "^18.0.14",
+		"@types/uuid": "^8.3.4",
+		"typescript": "^4.7.4",
+		"uuid": "^8.3.2"
+	},
+	"devDependencies": {
+		"@types/jest": "^28.1.4",
+		"eslint": "^8.19.0",
+		"jest": "^28.1.2"
+	},
+	"peerDependencies": {
+		"react": "^18.2.0"
+	},
+	"private": false
+}
