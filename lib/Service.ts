@@ -71,6 +71,18 @@ export class Service {
 			});
 
 			return this;
+		} else if(!(message instanceof Message) && typeof message === "object") {
+			if("data" in message) {
+				this.receive(Message.From(message));
+
+				return this;
+			}
+
+			this.receive(Message.From({
+				data: message,
+			}));
+
+			return this;
 		}
 
 		/**

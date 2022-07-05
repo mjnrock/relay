@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Service = void 0;
 const Channel_1 = __importDefault(require("./Channel"));
+const Message_1 = __importDefault(require("./Message"));
 const MessageCollection_1 = __importDefault(require("./MessageCollection"));
 /**
  * The Service is a handler registry that allows for the handling of messages
@@ -63,6 +64,16 @@ class Service {
             message.each((msg) => {
                 this.receive(msg);
             });
+            return this;
+        }
+        else if (!(message instanceof Message_1.default) && typeof message === "object") {
+            if ("data" in message) {
+                this.receive(Message_1.default.From(message));
+                return this;
+            }
+            this.receive(Message_1.default.From({
+                data: message,
+            }));
             return this;
         }
         /**
