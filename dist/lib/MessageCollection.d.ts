@@ -10,7 +10,7 @@ export declare class MessageCollection {
     empty(): this;
     get size(): number;
     values(): Message[];
-    each(callback: (message: Message, key: number) => void): void;
+    each(callback: (message: Message, key: number) => any): any;
     get(ts: number): Message[];
     getSince(ts: number, inclusive?: boolean): Message[];
     getBetween(start: number, end: number): Message[];

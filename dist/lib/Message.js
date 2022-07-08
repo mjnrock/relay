@@ -7,7 +7,11 @@ class Message {
     data;
     emitter;
     meta;
-    constructor({ data, type, emitter, tags = [], meta = {} }) {
+    constructor({ data, type, emitter, tags = [], meta = {}, ...rest }) {
+        for (let [key, value] of Object.entries(rest)) {
+            // @ts-ignore
+            this[key] = value;
+        }
         this.id = (0, uuid_1.v4)();
         this.data = data;
         this.emitter = emitter;

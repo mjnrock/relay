@@ -57,11 +57,13 @@ class MessageCollection {
         return messages;
     }
     each(callback) {
+        const results = [];
         this.messages.forEach((entry, key) => {
             for (const message of entry.values()) {
-                callback(message, key);
+                results.push(callback(message, key));
             }
         });
+        return results;
     }
     get(ts) {
         const entry = this.messages.get(ts);

@@ -1,6 +1,6 @@
 import Message from "./Message";
 import MessageCollection from "./MessageCollection";
-import Service from "./Service";
+import System from "./System";
 import Subscription from "./Subscription";
 import Channel from "./Channel";
 import Network from "./Network";
@@ -8,7 +8,7 @@ import Network from "./Network";
 export default {
 	Message,
 	MessageCollection,
-	Service,
+	System,
 	Subscription,
 	Channel,
 	Network,

@@ -6,7 +6,12 @@ export class Message {
 	public emitter: any;
 	public meta: any;
 
-	constructor({ data, type, emitter, tags = [], meta = {} }: { data: any, emitter: string, type?: string, tags?: string[] | Set<string>, meta?: any }) {
+	constructor({ data, type, emitter, tags = [], meta = {}, ...rest }: { data: any, emitter: string, type?: string, tags?: string[] | Set<string>, meta?: any }) {
+		for(let [ key, value ] of Object.entries(rest)) {
+			// @ts-ignore
+			this[ key ] = value;
+		}
+
 		this.id = uuid();
 		this.data = data;
 		this.emitter = emitter;

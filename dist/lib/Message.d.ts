@@ -3,7 +3,7 @@ export declare class Message {
     data: any;
     emitter: any;
     meta: any;
-    constructor({ data, type, emitter, tags, meta }: {
+    constructor({ data, type, emitter, tags, meta, ...rest }: {
         data: any;
         emitter: string;
         type?: string;

@@ -5,14 +5,14 @@ import MessageCollection from "./MessageCollection";
 export type HandlerEntries = Map<string, Function> | Array<[ string, Function ]> | Object;
 
 /**
- * The Service is a handler registry that allows for the handling of messages
+ * The System is a handler registry that allows for the handling of messages
  * when they are sent to the bus and have a corresponding handler registered via
  * the Message.type property.
  * 
  * A generic handler can be registered under the "default" key, which will be called
  * for all messages that will *only be called if no handler exists* for that Message.type.
  */
-export class Service {
+export class System {
 	public handlers: Map<string, Function>;
 
 	constructor (handlers: HandlerEntries = []) {
@@ -64,29 +64,21 @@ export class Service {
 		return this.handlers.has(name);
 	}
 
-	public receive(message: Message | MessageCollection | Channel) {
+	public receive(message: Message | MessageCollection | Channel): any {
 		if(message instanceof Channel) {
-			this.receive(message.messages);
-
-			return this;
+			return this.receive(message.messages);
 		} else if(message instanceof MessageCollection) {
-			message.each((msg) => {
+			return message.each((msg) => {
 				this.receive(msg);
 			});
-
-			return this;
 		} else if(!(message instanceof Message) && typeof message === "object") {
 			if("data" in message) {
-				this.receive(Message.From(message));
-
-				return this;
+				return this.receive(Message.From(message));
 			}
 
-			this.receive(Message.From({
+			return this.receive(Message.From({
 				data: message,
 			}));
-
-			return this;
 		}
 
 		/**
@@ -109,7 +101,7 @@ export class Service {
 		/**
 		 * A boolean flag to determine if the message was handled.
 		 */
-		let handled = false;
+		let results;
 
 		if(pre) {
 			const filter = pre(message);
@@ -123,17 +115,15 @@ export class Service {
 		}
 
 		if(handler) {
-			handler(message);
-
-			handled = true;
+			results = handler(message);
 		}
 
 		if(post) {
 			post(message);
 		}
 
-		return handled;
+		return results;
 	}
 }
 
-export default Service;
+export default System;

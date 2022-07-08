@@ -65,12 +65,15 @@ export class MessageCollection {
 
 		return messages;
 	}
-	public each(callback: (message: Message, key: number) => void) {
+	public each(callback: (message: Message, key: number) => any): any {
+		const results: any = [];
 		this.messages.forEach((entry: Set<Message>, key: number) => {
 			for(const message of entry.values()) {
-				callback(message, key);
+				results.push(callback(message, key));
 			}
 		});
+
+		return results;
 	}
 
 	public get(ts: number): Message[] {
